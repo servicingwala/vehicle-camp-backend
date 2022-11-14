@@ -2,7 +2,7 @@
   "name": "vehicle-camp-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "routes/index.js",
   "scripts": {
     "start": "node routes/index",
     "dev": "nodemon routes/index",
