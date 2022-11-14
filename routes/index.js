@@ -14,6 +14,11 @@ app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
 
+//test root route
+app.get("/", (req, res) => {
+  res.send("Hello World! This is the root route of the app");
+});
+
 //create vehicle route
 app.post("/create-vehicle", async (req, res) => {
   await Vehicle.create(req.body);
