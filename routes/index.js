@@ -2,7 +2,7 @@ const express = require("express");
 const sequelize = require("../database/database");
 const Vehicle = require("../models/Vehicle");
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync().then(() => {
   console.log("Database connection established");
 });
 
