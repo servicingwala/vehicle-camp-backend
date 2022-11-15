@@ -1,6 +1,8 @@
 const express = require("express");
 const sequelize = require("../database/database");
 const Vehicle = require("../models/Vehicle");
+const User = require("../models/User");
+require("dotenv").config();
 
 sequelize.sync().then(() => {
   console.log("Database connection established");
@@ -53,4 +55,24 @@ app.delete("/delete-vehicle/:vehicleNumber", async (req, res) => {
     where: { vehicleNumber: req.params.vehicleNumber },
   });
   res.send("vehicle details deleted");
+});
+
+//create route for login
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ where: { email: email } });
+  if (!user) {
+    res.status(401).send("User not found");
+  }
+  if (user.password === password && user.role === "sudo") {
+    res.status(200).send("Login successful");
+  } else {
+    res.status(401).send("Incorrect password");
+  }
+});
+
+//create route for signup
+app.post("/signup", async (req, res) => {
+  await User.create(req.body);
+  res.send("User created");
 });
